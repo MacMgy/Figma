@@ -1,5 +1,5 @@
 import { BuildObject } from "./xmlBuilder"
-import { CreateButton } from "./button"
+import { Button, CreateButton } from "./button"
 
 
 enum TagTypes{
@@ -11,7 +11,7 @@ export function ParseFigmaObject(obj): string {
     const type = ParseContentType(obj.name)
       switch(type){
         case TagTypes.Button: {
-            const button = CreateButton(obj)
+            const button = Button.Create(obj)
             const xml = BuildObject(button)
             return xml
         }
