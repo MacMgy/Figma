@@ -19,15 +19,3 @@ export class Button implements IObject {
         return inst
     }
 }
-
-export function CreateButton(obj): IObject {
-    const inst: Button = new Button()
-    inst.attributes = [{
-        name: "height",
-        value: obj.height,
-    },{
-        name: "width",
-        value: obj.width,
-    },]
-    return inst
-}

@@ -1,5 +1,5 @@
 import { BuildObject } from "./xmlBuilder"
-import { Button, CreateButton } from "./button"
+import { Button } from "./button"
 
 
 enum TagTypes{
