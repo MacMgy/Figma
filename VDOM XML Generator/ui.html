@@ -70,21 +70,26 @@ body {
 
 <div class="container">
     <h2>Generated XML</h2>
-    <textarea id="count">Some text...</textarea>
-    <button id="create">Create</button>
+    <textarea id="text">Some text...</textarea>
+    <button id="copy">Copy</button>
     <button id="cancel">Cancel</button>
 </div>
 
 <script>
+  parent.postMessage({ pluginMessage: { type: 'gen' } }, '*')
+  
+  onmessage = msg => {
+    document.getElementById('text').innerText = msg.data.pluginMessage.xml
+  }
 
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
-}
+  document.getElementById('copy').onclick = () => {
+    const copyText = document.getElementById('copy');
+    copyText.select();
+    document.execCommand("copy");
+  }
 
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
+  document.getElementById('cancel').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'close' } }, '*')
+  }
 
 </script>
