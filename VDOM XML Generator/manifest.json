@@ -2,6 +2,6 @@
   "name": "VDOM XML Generator",
   "id": "849123512083425712",
   "api": "1.0.0",
-  "main": "code.js",
-  "ui": "ui.html"
+  "main": "src/code.js",
+  "ui": "src/ui.html"
 }
