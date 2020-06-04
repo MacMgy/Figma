@@ -12,6 +12,17 @@ figma.showUI(__html__);
 // callback. The callback will be passed the "pluginMessage" property of the
 // posted message.
 figma.ui.onmessage = msg => {
+  switch(msg.type) {
+    case 'gen': {
+      break;
+    }
+    case 'close': {
+      figma.closePlugin();
+    }
+    default: {
+      figma.ui.postMessage({"error":"not valid type"})
+    }
+  }
   // One way of distinguishing between different types of messages sent from
   // your HTML page is to use an object with a "type" property like this.
   if (msg.type === 'create-rectangles') {
