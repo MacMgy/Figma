@@ -1,17 +1,95 @@
-<h2>Rectangle Creator</h2>
-<p>Count: <input id="count" value="5"></p>
-<button id="create">Create</button>
-<button id="cancel">Cancel</button>
+<style>
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: #444;
+    margin: 12px 12px;
+    outline: none;
+}
+
+  h2 {
+      text-align:  center;
+  }
+
+  input, select {
+      height: 100px;
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: none;
+  }
+
+  button {
+      width: 100%;
+      background-color: #BBBBBB;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+  button:hover {
+      background-color: #7FB47E;
+  }
+
+  div {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+  }
+
+  textarea {
+      width: 100%;
+      height: 150px;
+      margin: auto;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      border: 2px solid #7FB47E;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      resize: none;
+  }
+
+  .container {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 30px 25px;
+    position: relative;
+  }
+
+</style>
+
+<div class="container">
+    <h2>Generated XML</h2>
+    <textarea id="text">Some text...</textarea>
+    <button id="copy">Copy</button>
+    <button id="cancel">Cancel</button>
+</div>
+
 <script>
+  parent.postMessage({ pluginMessage: { type: 'gen' } }, '*')
+  
+  onmessage = msg => {
+    document.getElementById('text').innerText = msg.data.pluginMessage.xml
+  }
 
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
-}
+  document.getElementById('copy').onclick = () => {
+    const copyText = document.getElementById('copy');
+    copyText.select();
+    document.execCommand("copy");
+  }
 
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
+  document.getElementById('cancel').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'close' } }, '*')
+  }
 
 </script>
